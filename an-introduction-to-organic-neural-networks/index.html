@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>An Introduction to Organic Neural Networks</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>An Introduction to Organic Neural Networks</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2024-04-21" class="article-date">2024-04-21</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• article</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <h1>Artificial Intelligence</h1>
+<p>Artificial Intelligence (AI) has disrupted many industries since the inception of the field. In recent years, deep learning models and Artificial Neural Networks (ANNs), models inspired by how the human brain processes information, have been at the forefront of the disruptive force.</p>
+<p>This inspiration continues to guide the development of AI today. Many leading AI companies such as Meta AI, OpenAI, character.ai, and Google Deepmind, aim to build artificial general intelligence (AGI). Often envisioned as an AI capable of doing any intellectual task to the same degree of competence as an expert human.</p>
+<p>As groundbreaking as deep learning models have been, they have their shortcomings.</p>
+<h2>Learning takes a lot of exposure</h2>
+<p>Deep learning models must experience the same data points many times before forming a basic understanding. This is manifested in the huge datasets that are required to teach complex tasks to deep learning models successfully.</p>
+<p>The size of these datasets is growing year over year. For example, on the left graph below is the size of modern language datasets over time, with recent data sets having over a trillion data points. On the right, is the same graph but for image datasets, a similar trend of growing size is followed. [1]</p>
+<p>In the case of language, that is more than the number of words you will speak in your entire life.</p>
+<h2>Generalization is low</h2>
+<p>Even after having been exposed to large quantities of data, the span of generalization remains low. There is some generalization otherwise the entire premise of deep learning would be pointless, but a model's performance in a task greatly depends on the number of examples of that task in its training dataset.</p>
+<p>A recent preprint has shown that even in incredibly large multi-model models, the performance on a "never before seen task" heavily depends on the number of examples of that task in the dataset. Increasing the performance on zero-shot tasks requires exponentially more data for improvement. [2]</p>
+<h2>Lots of Computational Power</h2>
+<p>Training a deep learning model takes a lot of computational power. As a result, it takes a lot of power and becomes unreasonably expensive for any individual to train a foundation model.</p>
+<p>For example, OpenAI's GPT-3 model costs upwards of $5 million in GPUs to train. [3] Training a model like GPT-3 can take up to 1,300 megawatt hours (MWh) of electricity, which is enough to power 130 US homes. [4] Or another measure, since the average adult brain consumes 0.3 kilowatt hours per day, [5] training GPT-3 consumed enough power to sustain 143 human brains from birth to death. (power consumed per day * days in a year * average life expectancy in Canada)</p>
+<h1>Organic Neural Networks</h1>
+<p>Organic Neural Networks (ONNs) are fabricated networks of organic neurons. Up until now, scientists have been able to teach ONNs to fly airplanes, [6] control simple robots [7] and play Pong [8]. Though this research is still in its early stages, I have found it fascinating.</p>
+<h2>General Overview</h2>
+<p>The current approach is to grow a network of neurons (a brain) on a flat sheet of plastic that is connected to a multi-electrode array. Since neurons communicate with electrical pulses, different areas of the multi-electrode array are dedicated to send signals, and another area to receive signals. [6][7]</p>
+<h3>How to Grow a Brain</h3>
+<p>Neurons are the main type of computation cell within your brain. Unlike many other cells, neurons don't undergo mitosis, and so are unable to grow in numbers. In this case, growing a brain is not about growing the cells within the brain, but creating the connections and pathways between those cells.</p>
+<p>For connections to form, they need neurons. These cells are collected from the cerebral cortex of rodent embryos such as rats or mice. [6][8] In newer projects, a type of engineered stem cell is used to grow into neurons instead. Along with neurons, necessary glial cells are also collected and placed in a tissue culture dish. [6] This is a glass or plastic container that offers an environment for cells to grow.</p>
+<p>Once inside the containers, the cells are supplemented with culture media. Culture media can be thought of as food for cells, it's a liquid or gel that contains nutrients for cells to ingest. Neurons consume these nutrients and then spread their dendrites looking for other neurons to connect with. The culture media is swapped about once per week to keep the cells healthy. [12]</p>
+<p>After 3-5 days, the neurons become active, and after 10 days the networks themselves begin to experience periodic short bursts of activity. [6] These short bursts of energy will continue through the network's entire lifespan.</p>
+<h3>What is a Multi-Electrode Array</h3>
+<p>To understand the multi-electrode array (MEA), you must first understand the electrode. An electrode is a conductor, meaning it can transfer electricity. You can think of it as a bridge. The electrode does not generate electricity, and it does not record electricity, it simply transfers electricity in and out.</p>
+<p>An MEA is a group of electrodes used to act as a large bridge between the neurons and external signals.</p>
+<h3>How to Attach Brain to Multi-Electrode Array</h3>
+<p>To act as a proper bridge, the MEA must be connected to both sources. The brains that have been grown are <em>in vitro</em>, meaning they are outside of an organism. In fact, the brains are grown in a little container with one of the sides being the MEA itself. The neurons attach directly to the electrodes and their signals can then be recorded.</p>
+<h3>Stimulation and Recording</h3>
+<p>This sheet of electrodes can then transfer the electrical signals from the neural activity to a computer. In the pong playing ONN named <em>DishBrain</em> they separated their MEA into three sections.</p>
+<p>One section was used to send data from the pong game to the ONN, and the other two sections were used to record data from the <em>DishBrain</em> to determine how to move the paddle.</p>
+<p>The top area of the MEA was used for inputs, and the two smaller areas were used as motor regions for the paddle. [8]</p>
+<p>Though the neurons become spontaneously active after a few days in the dish, when connected to a simulated environment, they are not arranged to complete any objective. To train an ONN, the neurons themselves cannot be tuned, instead, the predictability of the inputs is adjusted based on its actions.</p>
+<p>Similarly to the process of training an ANN, ONNs have a cost function. ONNs are constantly attempting to predict the sensory data they will receive. [9] To make the real data match their predictions, they can either tune their "beliefs" about the world, or they can take actions to move the world closer to their "beliefs". This cost function is built into the network and is not something that can currently be accessed.</p>
+<p>Instead, to train a network, it is rewarded with predictable sensory inputs when it takes a "correct" action, and punished with unpredictable sensory inputs when it takes an "incorrect" action. In the case of pong, whenever the paddle hits the ball and sends it back to the other side, the network is rewarded with a sequence of evenly spaced pulses. Whereas if the ball hit the back wall past the paddle, it would receive random noise, then the ball would reset and go in a random direction. [8]</p>
+<p>Since the network is trying to minimize the cost function, it will aim to receive more predictable inputs.</p>
+<p>From this Pong experiment, scientists were able to determine that ONNs are able to gather more information and form more concrete patterns in less time than ANNs. It takes <em>DishBrain</em> 10-15 Pong rallies to match an ANN that has done 5000 rallies. [10][11] In most articles reporting about this, it's stated that the ONN is learning faster, but it's worth noting that the ANN might be able to do all 5000 rallies before DishBrain can complete the 10-15. Also, the ONN seems to hit a wall faster than our current ANN architectures because even though it can learn with fewer examples, it can still be beaten by a fully trained ANN.</p>
+<h2>Implications on AGI</h2>
+<p>Authors of DishBrain suggest it is possible generalized organic intelligence will be reached before AGI. [8] If this were to happen, it may actually be safer than digital intelligence as it will still need to deal with the confines of biology. It will not be able to easily duplicate itself, it won't be able to share memory very easily, and it won't be able to recursively self-upgrade at an exponential rate.</p>
+<p>An organic general intelligence may lead to a slower takeoff which may be easier to control and possibly even align.</p>
+<h2>Future Work</h2>
+<p>At the time of this writing, there are a few papers that are in pre-print format that build on the research done by <em>DishBrain</em> and the plane flying ONN.</p>
+<p>The main difference is the use of cerebral organoids. The ONNs I have written about are flat networks that span across a sheet of electrodes.</p>
+<p>A cerebral organoid is a collection of brain cells that have been grown to a 3D structure, thus allowing for more complex computations to take place. A very similar framework is used to get inputs and outputs into and out of the cerebral organoid, but instead of being a flat network, it is placed on top of the sheet of electrodes. [13]</p>
+<p>The use of a 3D structure allows for more complex computation and has allowed <em>Brainoware</em> (the name of this cerebral organoid) to predict the path of a non-linear chaotic function. [13]</p>
+<p>This is important because it demonstrates a certain amount of memory. Predicting this function requires knowledge of the previous data points, meaning the 3D structure is able to keep information in a kind of memory to perform a task.</p>
+<h1>Conclusion</h1>
+<p>Organic Neural Networks (ONNs) use real brain cells placed on a flat sheet of electrodes (Multi-Electrode Array, MEA) to perform tasks. These networks will optimize for predictable inputs, meaning they can be rewarded with recognizable patterns and punished with random noise. This is a new technology with plenty of unknowns that still need exploring.</p>
+<h1>References</h1>
+<p>Key: 🔬 Academic Article, 📺 Youtube Video, 📖 Book, 📰 Online Article</p>
+<p>[1]: 📰 <a href="https://epochai.org/blog/trends-in-training-dataset-sizes">Trends in Training Dataset Sizes</a><br />
+[2]: 🔬 <a href="https://arxiv.org/pdf/2404.04125.pdf">No “Zero-Shot” Without Exponential Data: Pretraining Concept Frequency Determines Multimodal Model Performance</a><br />
+[3]: 📰 <a href="https://www.forbes.com/sites/craigsmith/2023/09/08/what-large-models-cost-you--there-is-no-free-ai-lunch/?sh=5b709ab34af7">What Large Models Cost You – There Is No Free AI Lunch</a><br />
+[4]: 📰 <a href="https://www.theverge.com/24066646/ai-electricity-energy-watts-generative-consumption">How much electricity does AI consume?</a><br />
+[5]: 📰 <a href="https://bond.edu.au/news/how-much-energy-do-we-expend-using-our-brains">How much energy do we expend using our brains?</a><br />
+[6]: 🔬 <a href="https://philosophy.as.uky.edu/sites/default/files/Adaptive%20Flight%20Control%20With%20Living%20Neuronal%20Networks%20on%20Microelectrode%20Trays%20-%20De%20Marse%2C%20Dockendorf.pdf">Adaptive Flight Control With Living Neuronal Networks on Microelectrode Arrays</a><br />
+[7]: 📺 <a href="https://www.youtube.com/watch?v=63itUhH3ac8">Robot controlled by a Rat Brain</a><br />
+[8]: 🔬 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9747182/pdf/main.pdf">In vitro neurons learn and exhibit sentience when embodied in a simulated game-world</a><br />
+[9]: 📖 How Emotions Are Made - Lisa Feldman Barret<br />
+[10]: 📰 <a href="https://www.newscientist.com/article/2301500-human-brain-cells-in-a-dish-learn-to-play-pong-faster-than-an-ai/">Human brain cells in a dish learn to play Pong faster than an AI</a><br />
+[11]: 📰 <a href="https://www.pcgamer.com/scientists-taught-a-petri-dish-of-brain-cells-to-play-pong-faster-than-an-ai/">Scientists taught a petri dish of brain cells to play pong faster than an AI</a><br />
+[12]: 📺 <a href="https://www.youtube.com/watch?v=1w41gH6x_30">Rat Neurons Grown On A Computer Chip Fly A Simulated Aircraft</a><br />
+[13]: 🔬 <a href="https://www.biorxiv.org/content/10.1101/2023.02.28.530502v1.full.pdf">Brain Organoid Computing for Artificial Intelligence</a></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

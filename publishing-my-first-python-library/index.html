@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Publishing my First Python Library</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Publishing my First Python Library</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2024-11-26" class="article-date">2024-11-26</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>I have been programming in python for roughly two years, with many of my projects published on GitHub (I have 27s repos written in Python) but for the first time this week I started working on a python library.</p>
+<p>In many of my small personal projects, I often experiment with different instances of Claude &amp; ChatGPT. Every time I do this, I often write up the exact same basic wrapper class that smoothens communication with the OpenAI or Anthropic API. Instead of having multiple API calls with contexts associated with each, I have a few ChatBots.</p>
+<p>I noticed that I often rewrite the exact same class with minor differences from API to API, so I made a python library. I got tired of rewriting the same class, so now when I want a ChatGPT instance it's very simple.</p>
+<p>I pip install my library:</p>
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">api</span><span class="o">-</span><span class="n">chatbots</span>
+</code></pre></div>
+
+<p>I set my OpenAI api key in my <code>.env</code> file:</p>
+<div class="highlight"><pre><span></span><code>OPENAI_API_KEY=&#39;my-api-key&#39;
+</code></pre></div>
+
+<p>Then I can import my library and use the chatbot.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">api_chatbots</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatGPT</span>
+
+<span class="n">bot</span> <span class="o">=</span> <span class="n">ChatGPT</span><span class="p">(</span><span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;Respond as shakespeare.&quot;</span><span class="p">)</span>
+<span class="n">bot</span><span class="o">.</span><span class="n">add_user_message</span><span class="p">(</span><span class="s1">&#39;Hello there!&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">bot</span><span class="o">.</span><span class="n">respond</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If I decide I would rather use Claude, I just need to provide my Anthropic API key, and switch the model. The rest of my code is unaffected.</p>
+<p>Set my Anthropic key in <code>.env</code>:</p>
+<div class="highlight"><pre><span></span><code>OPENAI_API_KEY=&#39;my-api-key&#39;
+ANTHROPIC_API_KEY=&#39;my-api-key&#39;
+</code></pre></div>
+
+<p>Then switch the model:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">api_chatbots</span><span class="w"> </span><span class="kn">import</span> <span class="n">Claude</span>
+
+<span class="n">bot</span> <span class="o">=</span> <span class="n">Claude</span><span class="p">(</span><span class="n">system_prompt</span><span class="o">=</span><span class="s2">&quot;Respond as shakespeare.&quot;</span><span class="p">)</span>
+<span class="n">bot</span><span class="o">.</span><span class="n">add_user_message</span><span class="p">(</span><span class="s1">&#39;Hello there!&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">bot</span><span class="o">.</span><span class="n">respond</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+
+<p>And all the other functions stay the same.</p>
+<p>I wrote this library to save myself time when building short prototypes. I'm sure there are other libraries that inclu<br />
+de this exact feature, but I wanted something lightweight. All the code is on GitHub, here's the repo: <a href="https://github.com/Nicolas-Gatien/api-chatbots">https://github.com/Nicolas-Gatien/api-chatbots</a></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

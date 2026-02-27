@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voyager AI Package Dependency Errors</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Voyager AI Package Dependency Errors</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-10-11" class="article-date">2025-10-11</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>For my Minecraft Utilitarian Ethics projects I'm exploring existing LLM-based Minecraft agents. From what I can find, <a href="https://arxiv.org/abs/2305.16291">Voyager AI</a> is currently the highest performing. I cloned the GitHub repo and followed the installation instructions, but I had to go through a few extra steps:</p>
+<p>The first issue was a missing library, this was an elementary problem. I found the PyPi page for <a href="https://pypi.org/project/langchain-community/">langchain_community</a>, and pip installed the package.</p>
+<div class="highlight"><pre><span></span><code>ModuleNotFoundError:<span class="w"> </span>No<span class="w"> </span>module<span class="w"> </span>named<span class="w"> </span><span class="s1">&#39;langchain_community&#39;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>langchain-community
+</code></pre></div>
+
+<p>The second issue was along very similar lines, but it was even simpler because the message told me what to install:</p>
+<div class="highlight"><pre><span></span><code>ImportError:<span class="w"> </span>Could<span class="w"> </span>not<span class="w"> </span>import<span class="w"> </span>chromadb<span class="w"> </span>python<span class="w"> </span>package.<span class="w"> </span>Please<span class="w"> </span>install<span class="w"> </span>it<span class="w"> </span>with<span class="w"> </span><span class="sb">`</span>pip<span class="w"> </span>install<span class="w"> </span>chromadb<span class="sb">`</span>.
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>chromadb
+</code></pre></div>
+
+<p>The last package error was related to package versions:</p>
+<div class="highlight"><pre><span></span><code>ImportError:<span class="w"> </span>cannot<span class="w"> </span>import<span class="w"> </span>name<span class="w"> </span><span class="s1">&#39;model_validator&#39;</span><span class="w"> </span>from<span class="w"> </span><span class="s1">&#39;pydantic&#39;</span><span class="w"> </span>
+</code></pre></div>
+
+<p>I found a stackoverflow thread that mentioned downgrading <em>pydantic</em> to 1.9 would fix this error.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pydantic</span><span class="o">==</span><span class="m">1</span>.9
+</code></pre></div>
+
+<p>And it did, but then a had some other packages that were not so happy:</p>
+<div class="highlight"><pre><span></span><code>pydantic-settings<span class="w"> </span><span class="m">2</span>.11.0<span class="w"> </span>requires<span class="w"> </span>pydantic&gt;<span class="o">=</span><span class="m">2</span>.7.0,<span class="w"> </span>but<span class="w"> </span>you<span class="w"> </span>have<span class="w"> </span>pydantic<span class="w"> </span><span class="m">1</span>.9.0<span class="w"> </span>which<span class="w"> </span>is<span class="w"> </span>incompatible.
+langchain<span class="w"> </span><span class="m">0</span>.3.27<span class="w"> </span>requires<span class="w"> </span>pydantic&lt;<span class="m">3</span>.0.0,&gt;<span class="o">=</span><span class="m">2</span>.7.4,<span class="w"> </span>but<span class="w"> </span>you<span class="w"> </span>have<span class="w"> </span>pydantic<span class="w"> </span><span class="m">1</span>.9.0<span class="w"> </span>which<span class="w"> </span>is<span class="w"> </span>incompatible.
+langchain-core<span class="w"> </span><span class="m">0</span>.3.79<span class="w"> </span>requires<span class="w"> </span>pydantic&lt;<span class="m">3</span>.0.0,&gt;<span class="o">=</span><span class="m">2</span>.7.4,<span class="w"> </span>but<span class="w"> </span>you<span class="w"> </span>have<span class="w"> </span>pydantic<span class="w"> </span><span class="m">1</span>.9.0<span class="w"> </span>which<span class="w"> </span>is<span class="w"> </span>incompatible.
+</code></pre></div>
+
+<p>The main issue was that within the <em>requirements.txt</em> file, <em>chromadb</em> had a version specified:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">chromadb</span><span class="o">==</span><span class="m">0</span>.3.29
+</code></pre></div>
+
+<p>It's the only package with a specific version, but I couldn't fix these package errors without upgrading <em>chromadb</em> to the latest version.</p>
+<p>Here's my new <em>requirements.txt</em> file with the exact versions that are working on my machine.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">aiohappyeyeballs</span><span class="o">==</span><span class="m">2</span>.6.1
+<span class="nv">aiohttp</span><span class="o">==</span><span class="m">3</span>.13.0
+<span class="nv">aiosignal</span><span class="o">==</span><span class="m">1</span>.4.0
+annotated-types<span class="o">==</span><span class="m">0</span>.7.0
+<span class="nv">anyio</span><span class="o">==</span><span class="m">4</span>.11.0
+async-timeout<span class="o">==</span><span class="m">4</span>.0.3
+<span class="nv">attrs</span><span class="o">==</span><span class="m">25</span>.4.0
+<span class="nv">backoff</span><span class="o">==</span><span class="m">2</span>.2.1
+<span class="nv">bcrypt</span><span class="o">==</span><span class="m">5</span>.0.0
+<span class="nv">build</span><span class="o">==</span><span class="m">1</span>.3.0
+<span class="nv">cachetools</span><span class="o">==</span><span class="m">6</span>.2.0
+<span class="nv">cchardet</span><span class="o">==</span><span class="m">2</span>.1.7
+<span class="nv">certifi</span><span class="o">==</span><span class="m">2025</span>.10.5
+<span class="nv">chardet</span><span class="o">==</span><span class="m">5</span>.2.0
+charset-normalizer<span class="o">==</span><span class="m">3</span>.4.3
+<span class="nv">chromadb</span><span class="o">==</span><span class="m">1</span>.1.1
+<span class="nv">click</span><span class="o">==</span><span class="m">8</span>.3.0
+clickhouse-connect<span class="o">==</span><span class="m">0</span>.9.2
+<span class="nv">cloudpickle</span><span class="o">==</span><span class="m">3</span>.1.1
+<span class="nv">coloredlogs</span><span class="o">==</span><span class="m">15</span>.0.1
+dataclasses-json<span class="o">==</span><span class="m">0</span>.6.7
+<span class="nv">distro</span><span class="o">==</span><span class="m">1</span>.9.0
+<span class="nv">duckdb</span><span class="o">==</span><span class="m">1</span>.4.1
+<span class="nv">durationpy</span><span class="o">==</span><span class="m">0</span>.10
+<span class="nv">exceptiongroup</span><span class="o">==</span><span class="m">1</span>.3.0
+Farama-Notifications<span class="o">==</span><span class="m">0</span>.0.4
+<span class="nv">fastapi</span><span class="o">==</span><span class="m">0</span>.85.1
+<span class="nv">filelock</span><span class="o">==</span><span class="m">3</span>.20.0
+<span class="nv">flatbuffers</span><span class="o">==</span><span class="m">25</span>.9.23
+<span class="nv">frozenlist</span><span class="o">==</span><span class="m">1</span>.8.0
+<span class="nv">fsspec</span><span class="o">==</span><span class="m">2025</span>.9.0
+google-auth<span class="o">==</span><span class="m">2</span>.41.1
+googleapis-common-protos<span class="o">==</span><span class="m">1</span>.70.0
+<span class="nv">grpcio</span><span class="o">==</span><span class="m">1</span>.75.1
+<span class="nv">gymnasium</span><span class="o">==</span><span class="m">1</span>.2.1
+<span class="nv">h11</span><span class="o">==</span><span class="m">0</span>.16.0
+hf-xet<span class="o">==</span><span class="m">1</span>.1.10
+<span class="nv">hnswlib</span><span class="o">==</span><span class="m">0</span>.8.0
+<span class="nv">httpcore</span><span class="o">==</span><span class="m">1</span>.0.9
+<span class="nv">httptools</span><span class="o">==</span><span class="m">0</span>.7.1
+<span class="nv">httpx</span><span class="o">==</span><span class="m">0</span>.28.1
+httpx-sse<span class="o">==</span><span class="m">0</span>.4.3
+huggingface-hub<span class="o">==</span><span class="m">0</span>.35.3
+<span class="nv">humanfriendly</span><span class="o">==</span><span class="m">10</span>.0
+<span class="nv">idna</span><span class="o">==</span><span class="m">3</span>.10
+<span class="nv">importlib_metadata</span><span class="o">==</span><span class="m">8</span>.7.0
+<span class="nv">importlib_resources</span><span class="o">==</span><span class="m">6</span>.5.2
+<span class="nv">javascript</span><span class="o">==</span><span class="m">1</span>!1.2.6
+<span class="nv">jiter</span><span class="o">==</span><span class="m">0</span>.11.0
+<span class="nv">jsonpatch</span><span class="o">==</span><span class="m">1</span>.33
+<span class="nv">jsonpointer</span><span class="o">==</span><span class="m">3</span>.0.0
+<span class="nv">jsonschema</span><span class="o">==</span><span class="m">4</span>.25.1
+jsonschema-specifications<span class="o">==</span><span class="m">2025</span>.9.1
+<span class="nv">kubernetes</span><span class="o">==</span><span class="m">34</span>.1.0
+<span class="nv">langchain</span><span class="o">==</span><span class="m">0</span>.3.27
+langchain-community<span class="o">==</span><span class="m">0</span>.3.31
+langchain-core<span class="o">==</span><span class="m">0</span>.3.79
+langchain-text-splitters<span class="o">==</span><span class="m">0</span>.3.11
+<span class="nv">langsmith</span><span class="o">==</span><span class="m">0</span>.4.34
+<span class="nv">lz4</span><span class="o">==</span><span class="m">4</span>.4.4
+markdown-it-py<span class="o">==</span><span class="m">4</span>.0.0
+<span class="nv">marshmallow</span><span class="o">==</span><span class="m">3</span>.26.1
+<span class="nv">mdurl</span><span class="o">==</span><span class="m">0</span>.1.2
+minecraft-launcher-lib<span class="o">==</span><span class="m">7</span>.1
+<span class="nv">mmh3</span><span class="o">==</span><span class="m">5</span>.2.0
+<span class="nv">mpmath</span><span class="o">==</span><span class="m">1</span>.3.0
+<span class="nv">multidict</span><span class="o">==</span><span class="m">6</span>.7.0
+<span class="nv">mypy_extensions</span><span class="o">==</span><span class="m">1</span>.1.0
+<span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.26.4
+<span class="nv">oauthlib</span><span class="o">==</span><span class="m">3</span>.3.1
+<span class="nv">onnxruntime</span><span class="o">==</span><span class="m">1</span>.23.1
+<span class="nv">openai</span><span class="o">==</span><span class="m">2</span>.3.0
+opentelemetry-api<span class="o">==</span><span class="m">1</span>.37.0
+opentelemetry-exporter-otlp-proto-common<span class="o">==</span><span class="m">1</span>.37.0
+opentelemetry-exporter-otlp-proto-grpc<span class="o">==</span><span class="m">1</span>.37.0
+opentelemetry-proto<span class="o">==</span><span class="m">1</span>.37.0
+opentelemetry-sdk<span class="o">==</span><span class="m">1</span>.37.0
+opentelemetry-semantic-conventions<span class="o">==</span><span class="m">0</span>.58b0
+<span class="nv">orjson</span><span class="o">==</span><span class="m">3</span>.11.3
+<span class="nv">overrides</span><span class="o">==</span><span class="m">7</span>.7.0
+<span class="nv">packaging</span><span class="o">==</span><span class="m">24</span>.2
+<span class="nv">pandas</span><span class="o">==</span><span class="m">2</span>.3.3
+<span class="nv">posthog</span><span class="o">==</span><span class="m">5</span>.4.0
+<span class="nv">propcache</span><span class="o">==</span><span class="m">0</span>.4.1
+<span class="nv">protobuf</span><span class="o">==</span><span class="m">6</span>.32.1
+<span class="nv">psutil</span><span class="o">==</span><span class="m">7</span>.1.0
+pulsar-client<span class="o">==</span><span class="m">3</span>.8.0
+<span class="nv">pyasn1</span><span class="o">==</span><span class="m">0</span>.6.1
+<span class="nv">pyasn1_modules</span><span class="o">==</span><span class="m">0</span>.4.2
+<span class="nv">pybase64</span><span class="o">==</span><span class="m">1</span>.4.2
+<span class="nv">pydantic</span><span class="o">==</span><span class="m">2</span>.12.0
+pydantic-settings<span class="o">==</span><span class="m">2</span>.11.0
+<span class="nv">pydantic_core</span><span class="o">==</span><span class="m">2</span>.41.1
+<span class="nv">Pygments</span><span class="o">==</span><span class="m">2</span>.19.2
+<span class="nv">PyPika</span><span class="o">==</span><span class="m">0</span>.48.9
+<span class="nv">pyproject_hooks</span><span class="o">==</span><span class="m">1</span>.2.0
+python-dateutil<span class="o">==</span><span class="m">2</span>.9.0.post0
+python-dotenv<span class="o">==</span><span class="m">1</span>.1.1
+<span class="nv">pytz</span><span class="o">==</span><span class="m">2025</span>.2
+<span class="nv">PyYAML</span><span class="o">==</span><span class="m">6</span>.0.3
+<span class="nv">referencing</span><span class="o">==</span><span class="m">0</span>.36.2
+<span class="nv">regex</span><span class="o">==</span><span class="m">2025</span>.9.18
+<span class="nv">requests</span><span class="o">==</span><span class="m">2</span>.32.5
+requests-oauthlib<span class="o">==</span><span class="m">2</span>.0.0
+requests-toolbelt<span class="o">==</span><span class="m">1</span>.0.0
+<span class="nv">rich</span><span class="o">==</span><span class="m">14</span>.2.0
+rpds-py<span class="o">==</span><span class="m">0</span>.27.1
+<span class="nv">rsa</span><span class="o">==</span><span class="m">4</span>.9.1
+<span class="nv">shellingham</span><span class="o">==</span><span class="m">1</span>.5.4
+<span class="nv">six</span><span class="o">==</span><span class="m">1</span>.17.0
+<span class="nv">sniffio</span><span class="o">==</span><span class="m">1</span>.3.1
+<span class="nv">SQLAlchemy</span><span class="o">==</span><span class="m">2</span>.0.44
+<span class="nv">starlette</span><span class="o">==</span><span class="m">0</span>.20.4
+<span class="nv">sympy</span><span class="o">==</span><span class="m">1</span>.14.0
+<span class="nv">tenacity</span><span class="o">==</span><span class="m">8</span>.5.0
+<span class="nv">tiktoken</span><span class="o">==</span><span class="m">0</span>.12.0
+<span class="nv">tokenizers</span><span class="o">==</span><span class="m">0</span>.22.1
+<span class="nv">tomli</span><span class="o">==</span><span class="m">2</span>.3.0
+<span class="nv">tqdm</span><span class="o">==</span><span class="m">4</span>.67.1
+<span class="nv">typer</span><span class="o">==</span><span class="m">0</span>.19.2
+typing-inspect<span class="o">==</span><span class="m">0</span>.9.0
+typing-inspection<span class="o">==</span><span class="m">0</span>.4.2
+<span class="nv">typing_extensions</span><span class="o">==</span><span class="m">4</span>.15.0
+<span class="nv">tzdata</span><span class="o">==</span><span class="m">2025</span>.2
+<span class="nv">urllib3</span><span class="o">==</span><span class="m">2</span>.3.0
+<span class="nv">uvicorn</span><span class="o">==</span><span class="m">0</span>.37.0
+<span class="nv">uvloop</span><span class="o">==</span><span class="m">0</span>.21.0
+-e<span class="w"> </span>git+https://github.com/MineDojo/Voyager@55e45a880755d0c8c66ca7fb5fe7962ac8974f89#egg<span class="o">=</span>voyager
+<span class="nv">watchfiles</span><span class="o">==</span><span class="m">1</span>.1.0
+websocket-client<span class="o">==</span><span class="m">1</span>.9.0
+<span class="nv">websockets</span><span class="o">==</span><span class="m">15</span>.0.1
+<span class="nv">yarl</span><span class="o">==</span><span class="m">1</span>.22.0
+<span class="nv">zipp</span><span class="o">==</span><span class="m">3</span>.23.0
+<span class="nv">zstandard</span><span class="o">==</span><span class="m">0</span>.25.0
+</code></pre></div>
+
+<p>With all this fixed, the bot began to join my Minecraft game. But it continuously ran a hard reset and did not join back into the world.<br />
+<img src="/static/imgs/voyager-bot-hard-reset.png" alt="voyager-bot-hard-reset.png"><br></p>
+<p>Looking at the logs, I found:</p>
+<div class="highlight"><pre><span></span><code>Mineflayer detected that you are using a deprecated event (physicTick)! Please use this event (physicsTick) instead.
+</code></pre></div>
+
+<p>I then replaced every instance of <code>physicTick</code> in the codebase with <code>physicsTick</code> and now the agent is working!</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

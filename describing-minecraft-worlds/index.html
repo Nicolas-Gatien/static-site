@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Describing Minecraft Worlds</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Describing Minecraft Worlds</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2026-02-02" class="article-date">2026-02-02</time>
+    
+
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>My <a href="/utilitarian-ethics-in-minecraft" class="internal">utilitarian-ethics-in-minecraft</a> project initially revolved around maximizing the utility of a single Minecraft village. This has now shifted to maximizing global utility in the agent's world. So I had to think of a way to describe a minecraft world to a LLM in a token-efficient manner.</p>
+<p>My current approach is to first retrieve a list of all the blocks around the agent (65 blocks in all directions). Then I loop through each block and determine whether it is near the surface or not. I do this using the skyLight level of each block, which is the amount of light the block receives from the sky at daylight.</p>
+<p>I'm currently only paying attention to blocks that receive full light from the sky, because it determines the contour of the world. Eventually I would like to map caves as well, but I haven't quite figured that one out yet. For now I'm sticking to biomes. Each block in the outer layer of the world is added to a sum for its corresponding biome. Each biome takes the average position of all the blocks at its surface, and that becomes the biome's position.</p>
+<p>With this information, I can generate a small piece of text like:</p>
+<div class="highlight"><pre><span></span><code>The following biomes are around you: plains, stony_shore, meadow, 
+
+The plains is to the South and is located at: -989 78 2520. It makes up 96% of your surroundings.
+The stony_shore is to the West and is located at: -1054 72 2452. It makes up 4% of your surroundings.
+The meadow is to the South and is located at: -995 91 2592. It makes up 0% of your surroundings.
+</code></pre></div>
+
+<p>This is currently all the information my agent is using to make plans (as well as its existing context). There's obviously some things missing:</p>
+<ol>
+<li>it has no way of detecting structures</li>
+<li>it has no way of detecting caves</li>
+<li>it has no description of entities in the area</li>
+<li>it has no way of detecting player-made structures</li>
+<li>it has no way of knowing the positions of individual blocks</li>
+</ol>
+<p>Maybe I could include a highly specific description of the blocks in a 5x5 grid around the player, and a broad description of everything else?</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

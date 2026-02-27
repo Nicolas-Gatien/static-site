@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graphing EEG Data</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Graphing EEG Data</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-06-18" class="article-date">2025-06-18</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>I'm working on a new project related to visualizing EEG data. I'm doing this to gain some familiarity with recorded brain data and how to manipulate / handle it with code. That way when I get to start working with Synthetic Biological Neural Networks (see: <a href="/an-introduction-to-organic-neural-networks" class="internal">an-introduction-to-organic-neural-networks</a>, I'll know how to manage the data.</p>
+<p>I'm <a href="https://openneuro.org/datasets/ds003626/versions/2.1.2">starting out</a> with an open-source EEG dataset on Inner Speech that I found with <a href="https://openneuro.org/">OpenNeuro</a>. I'm also using the <a href="https://mne.tools/stable/index.html#">MNE</a> python library. For my first script, I downloaded a file from the dataset and opened it with <code>mne</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">mne</span>
+
+<span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_bdf</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data.bdf&#39;</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<p>If I just immediately plot this raw data, the output looks something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="n">raw</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="s1">&#39;eeg&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img src="/static/imgs/example_raw.png" alt="example_raw.png"><br></p>
+<p>I was very happy to see something on the graph as oppose to nothing.  I got a recommendation to then try applying some filtering to my data. Mainly, low and high pass filters. </p>
+<p>I found this article, "<a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&amp;pid=S1665-64232021000600584">The effects of applying filters on EEG signals for classifying developers’ code comprehension</a>" which mentions low-pass filters. The article reads: <em>"the filter used frequencies below 1Hz and greater than 40Hz to attenuate signals."</em> I interpreted this as meaning that all frequencies under 1Hz are discarded, and all frequencies above 40Hz are discarded. The text seems to read in the opposite way, but these values only work in this orientation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_bdf</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data.bdf&#39;</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">raw_filtered</span> <span class="o">=</span> <span class="n">raw</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">raw_filtered</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">l_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">h_freq</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Then if I plot it with the same line as before:</p>
+<div class="highlight"><pre><span></span><code><span class="n">raw_filtered</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="s1">&#39;eeg&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Then the resulting graph feels much more legible, even if I still haven't done anything to interpret it.</p>
+<p><img src="/static/imgs/example_filtered.png" alt="example_filtered.png"><br></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

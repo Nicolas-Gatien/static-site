@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notebox App</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Notebox App</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-10-24" class="article-date">2025-10-24</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>I regularly make use of my box of notecards when I'm reading new material. I find this system of taking notes and anchoring them to previous ideas works remarkably well for me. I would like to have a system similar when I am not able to access my physical notecards. Many people refer to a system like this as a Zettelkasten.</p>
+<p>Many apps, such as Obsidian or Logseq market themselves as capable of implementing a Zettelkasten system. While I believe this to be true, it doesn't quite encompass the same feel as my physical cards.</p>
+<p>I've been thinking of making a notecard focused app. Where the notes are on digital notecards. Here are the specifications I'm thinking of:</p>
+<ol>
+<li>A notecard is restrained to a maximum number of characters (about 3x the twitter character limit)</li>
+<li>A notecard must have a location in the box (determined by an address)</li>
+<li>Writing another notecard's address in the text of a notecard turns the address into a clickable hyperlink.</li>
+<li>While viewing a notecard, the two notecards preceding and proceeding it are displayed beneath and above.</li>
+<li>Notecards cannot be erased or moved once added and placed in the box</li>
+<li>Once a notecard is saved, the text on the notecard cannot be deleted, but it can be struck-through and more text can be added (if it's not yet at the character limit)</li>
+<li>It must be a downloadable app and work offline</li>
+</ol>
+<p>That's it.</p>
+<p>That is all I would implement for the first version, and then I would begin using it. Based on how I use it, I might make a few adjustments but this is all I need.</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

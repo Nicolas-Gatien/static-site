@@ -1,0 +1,143 @@
+body {
+    display: flex;
+    font-family: "Space Mono", monospace;
+    justify-content: space-between;
+    gap: 3%;
+}
+
+#content {
+    width: 50%;
+}
+
+#test-letter {
+    opacity: 0;
+    display: inline-block;
+}
+
+.blackout, .blackout-span {
+    background-color: black;
+    color: black;
+    border-radius: 3px;
+}
+
+.letter {
+    opacity: 0.1;
+    transition: all ease-in-out 0.05s;
+}
+
+.letter:hover {
+    opacity: 0.3;
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: all ease-in-out 0.05s;
+}
+
+.blackout-span:hover {
+    background-color: gray;
+    color: black;
+}
+
+.side {
+    width: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: default;
+}
+
+a {
+    text-decoration: wavy;
+    color: red;
+    transition: all 0.05s ease-in-out;
+}
+
+a:hover {
+    font-style: italic;
+    font-weight: bold;
+    transition: all 0.05s ease-in-out;
+}
+
+li {
+    transition: all 0.07s ease-in-out;
+}
+
+li:hover {
+        transition: all 0.07s ease-in-out;
+    margin-left: 10px;
+}
+
+h1 {
+    font-style: italic;
+    margin: 0px;
+}
+
+.button {
+    image-rendering: pixelated;
+    box-shadow: 0px 3px black;
+    transition: all ease-in-out 0.05s;
+}
+
+.button:hover {
+    box-shadow: 0px 0px black;
+    transform: translateY(3px);
+    transition: all ease-in-out 0.05s;
+}
+
+.heading-div {
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    transition: gap ease-in-out 0.05s;
+
+    .back-button {
+        opacity: 0;
+        width: 0px;
+        transition: opacity ease-in-out 0.05s;
+        background-color: transparent;
+        border: none;
+        font-family: "Space Mono", monospace;
+        font-size: 16px;
+        padding: 0px;
+    }
+
+    h1 {
+        margin-left: 0px;
+        transition: all ease-in-out 0.05s;
+    }
+}
+
+.heading-div:hover {
+    display: flex;
+    align-items: center;
+    transition: gap ease-in-out 0.05s;
+
+    .back-button {
+        opacity: 1;
+        width: auto;
+        color: red;
+    }
+
+    .back-button:hover {
+        font-style: italic;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    h1 {
+        margin-left: 20px;
+        transition: all ease-in-out 0.05s;
+    }
+}
+
+
+/* ATC STYLING */
+.card-holder {
+    display: flex;
+    justify-content: space-between;
+    
+    width: 100%;
+}
+
+.card-holder img {
+    max-width: 25%;
+    border-radius: 8px;
+}

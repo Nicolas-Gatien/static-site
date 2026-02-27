@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopping Robots.txt Spam on Hyperlinks</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Stopping Robots.txt Spam on Hyperlinks</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2026-02-03" class="article-date">2026-02-03</time>
+    
+
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>While crawling a page, the my search engines finds all the \<a> tags and extracts the hrefs inside them. I'm currently manually reviewing every hostname I allow my web crawler to explore, because I have a specific criteria.</p>
+<ol>
+<li>It must be a personal website</li>
+<li>It must have a robots.txt file with a content-signal <code>search=yes</code> for the <code>*</code> agent</li>
+</ol>
+<p>That way I am only indexing personal websites that are opting in to being indexed by a search engine. So when my web crawler is exploring a page, for each hyperlink, it would check whether the hostname of that hyperlink has a robots.txt file. The issue is, that if a page links to the same location multiple times, then my web crawler would fetch the robots.txt file multiple times with no delay.</p>
+<p>I fixed this by keeping a map of all hostnames the web crawler has explored during the current session. Whenever it finds a new hostname, it fetches the robots.txt file and parses the agent rules for the <code>*</code> agent. Once parsed, that object is mapped to the hostname.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">robotsMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">Robots</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now whenever a hyperlink is found on a page, before attempting to fetch the robots.txt, my crawler first checks whether it has already done so. If it has, it just uses the cached rules. If a page doesn't have a robots.txt file, to stop it from being pinged many times over, it's hostname is added to the map with a default rules object.</p>
+<p>You can see the exact changes in this <a href="https://github.com/Handmade-Search-Engine/handmade-indexer/commit/e54fc36b72e7b8c08d06745e6a102cdb9d31878b">commit</a></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

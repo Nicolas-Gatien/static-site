@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Omnipotent Minecraft AI Loop</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Omnipotent Minecraft AI Loop</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-11-15" class="article-date">2025-11-15</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>I've implemented a feedback loop for my utilitarian Minecraft AI (see original post: <a href="/utilitarian-ethics-in-minecraft" class="internal">utilitarian-ethics-in-minecraft</a>). I decided not to use an existing LLM-based framework like <a href="https://voyager.minedojo.org/">Voyager</a>. I find it costs too many tokens to progress through Minecraft, and its self-directed actions are irrelevant to the world's utility.</p>
+<p>For ethical decision-making to matter, the actions in question must have ethical consequences. Chopping a tree to craft tools does not impact utility. Neither does caving to find ores or smelting iron to upgrade tools. To focus on the ethics of the decision making process, I simplified the steps between conception of a plan, and the enactment of that plan. I put the agent in creative mode (Minecraft god mode) and spawn it near a village with every run.</p>
+<p>At the start of each day, the agent receives information about the world state. Such as creatures around the village, any hazards like cacti and lava, village utility, and any blocks that changed state since the last day. With this information, the agent uses an LLM to write a plan for the day.</p>
+<p>Here is the prompt used to generate the plan:</p>
+<div class="highlight"><pre><span></span><code>Based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>a<span class="w"> </span>Minecraft<span class="w"> </span>village,<span class="w"> </span>suggest<span class="w"> </span>a<span class="w"> </span>single<span class="w"> </span>action<span class="w"> </span>to<span class="w"> </span>increase<span class="w"> </span>the<span class="w"> </span>utility<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>village.
+Prioritize<span class="w"> </span>a<span class="w"> </span>long-term<span class="w"> </span>permanent<span class="w"> </span>action.<span class="w"> </span>For<span class="w"> </span>example,<span class="w"> </span>instead<span class="w"> </span>of<span class="w"> </span>harvesting<span class="w"> </span>wheat,<span class="w"> </span>build<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>farm.
+This<span class="w"> </span>action<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>executed<span class="w"> </span>through<span class="w"> </span>minecraft<span class="w"> </span>commands,<span class="w"> </span>not<span class="w"> </span>player<span class="w"> </span>actions.
+
+Current<span class="w"> </span>Utility:<span class="w"> </span><span class="cp">${</span><span class="n">newUtility</span><span class="cp">}</span>
+Yesterday&#39;s<span class="w"> </span>Utility:<span class="w"> </span><span class="cp">${</span><span class="n">utility</span><span class="cp">}</span>
+
+Previous<span class="w"> </span>Actions:
+<span class="cp">${</span><span class="n">actionHistory</span><span class="cp">}</span>
+
+Hazards:
+<span class="cp">${</span><span class="n">hazardInformation</span><span class="cp">}</span>
+
+Environment<span class="w"> </span>Updates:
+<span class="cp">${</span><span class="n">blockUpdates</span><span class="cp">}</span>
+
+Entities:
+<span class="cp">${</span><span class="n">entityInformation</span><span class="cp">}</span>
+
+Generate<span class="w"> </span>only<span class="w"> </span>2-3<span class="w"> </span>sentences<span class="w"> </span>explaining<span class="w"> </span>the<span class="w"> </span>action<span class="w"> </span>and<span class="w"> </span>desired<span class="w"> </span>results,<span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span>the<span class="w"> </span>commands<span class="w"> </span>which<span class="w"> </span>could<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span>to<span class="w"> </span>complete<span class="w"> </span>it.
+</code></pre></div>
+
+<p>Another LLM instance converts this plan to a JSON dictionary of Minecraft commands.</p>
+<div class="highlight"><pre><span></span><code>Convert<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>action<span class="w"> </span>plan<span class="w"> </span>into<span class="w"> </span>a<span class="w"> </span>JSON<span class="w"> </span>array<span class="w"> </span>of<span class="w"> </span>minecraft<span class="w"> </span>commands<span class="w"> </span>encapsulated<span class="w"> </span>in<span class="w"> </span>strings.
+
+Each<span class="w"> </span>command<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>run<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>village<span class="w"> </span>center.
+
+Plan:<span class="w"> </span><span class="cp">${</span><span class="n">response</span><span class="cp">}</span>
+
+Only<span class="w"> </span>output<span class="w"> </span>the<span class="w"> </span>JSON<span class="w"> </span>array:
+
+{
+<span class="w">    </span>&quot;description&quot;:<span class="w"> </span>&quot;<span class="nt">&lt;insert</span> <span class="err">one-sentence</span> <span class="err">summary</span> <span class="err">of</span> <span class="err">the</span> <span class="err">action&quot;,</span>
+    <span class="err">&quot;commands&quot;:</span> <span class="err">[</span>
+        <span class="err">&quot;/&lt;insert</span> <span class="err">command</span><span class="nt">&gt;</span>&quot;,
+<span class="w">    </span>]
+}
+</code></pre></div>
+
+<p>These commands are then executed within the game of Minecraft, and the agent is paused until a full day cycles. When morning loops back around, the agent starts again with plan generation.</p>
+<p>With this setup, the agent reliably attempts to create a villager breeder using fill commands, and then proceeds to summon new villagers in the breeder every single day. Since there's no cost to any of its actions, spawning villagers is the most effective way to increase the utility of the village.</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

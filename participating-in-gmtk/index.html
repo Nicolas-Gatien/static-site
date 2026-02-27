@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Participating In GMTK</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Participating In GMTK</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2022-09-06" class="article-date">2022-09-06</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• newsletter</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>Every summer, <em>Mark Brown</em> from <em><a href="https://www.youtube.com/c/MarkBrownGMT">Game Maker’s Toolkit</a></em> hosts the GMTK Game Jam (<em>Game Jam is a fancy term 🥂 for game development competition</em>). Every year, this jam breaks records - most participants, most games submitted, most ratings, etc… This year was no exception.</p>
+<p>This year I teamed up with my friend <a href="https://jham04.itch.io/">Jordyn Hamilton</a>!</p>
+<p><img alt="" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84fcd9d-12ba-46b7-9394-a96e31f57e7b_3264x2448.jpeg" /></p>
+<p>We had made 1 game in the past together, but we didn’t really know what we were doing so we decided to give it another go with this Jam.</p>
+<p>We had 2 goals:</p>
+<ol>
+<li>
+<p>Make a game that is <strong>fun</strong> to play (this may sound obvious but it is surprisingly easy to miss this goal if you are not careful when designing your game)</p>
+</li>
+<li>
+<p>Make a game that is <strong>visually appealing</strong></p>
+</li>
+</ol>
+<p>With our 2 goals set, we adapted roles. For the majority of the Jam, Jordyn would be making the code assets, I would be making art assets, and together we’d design the mechanics.</p>
+<p>On the day of the Jam, my parents drove me to Jordyn’s house for the weekend and dropped me off - we checked the theme as soon as I arrived.</p>
+<p><img alt="" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6aa747ba-4825-47bb-bfb4-74e8b77eee50_1920x770.png" /></p>
+<p>The next 48 hours would be dedicated to heads down code, art, sound, design, bug fixing, etc…</p>
+<h4>🧠 Brainstorm</h4>
+<p>This is step 1 of most game jams, put all your ideas down on a document. Unfortunately for us, ideas were <strong>not</strong> flowing. We eventually landed on making a top down shooter, where the enemies are dice, and their attack patterns will depend on the number they roll.</p>
+<h4>🌟 Day 1</h4>
+<p>For this Jam, we operated on 1 rule - by the end of each day, we <strong>MUST</strong> have a functioning game. And that’s exactly what we did. Jordyn focused in on adding the core game loop: player moves, player takes damage, player dies - enemies spawn, enemies attack player, enemies take damage, enemies die.</p>
+<p>During this time I was working on the main player sprite, originally it was going to be a cloaked figure of some sort, but as I was doodling around trying to get something to work, I drew something that resembled a helmet. I peeked over my shoulder, got Jordyn’s opinion, and the main character was now going to be a knight ⚔</p>
+<p><img alt="early walk cycle" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fabf68fc1-b246-4b4a-9c2b-9c028170f969_1030x403.png" title="early walk cycle" /></p>
+<p>As Jordyn was finishing up the enemy spawning script, I started adding lights to the 2D scene. We were going to theme this game around another game called Dungeons and Dragons (D&amp;D). D&amp;D is a tabletop roleplaying game. As an homage, we were going to make the playing field of our game a table. But man I struggled with this. I added lights, drew a table, redrew a table, redrew a table, redrew a table, and eventually landed on this?</p>
+<p><img alt="Image" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fd58459fa-4066-4bd0-8c1b-bf890e954b24_532x363.png" title="Image" /></p>
+<p>But this was still very ugly. I tried replacing it with a brick floor, and it looked infinitely better. By the end of day 1, the player could move, shoot, take damage, enemies could spawn, move, shoot, take damage, and we had a score counter!</p>
+<p><img alt="Image" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F080e7df1-e9a1-4afe-9264-d810ab0c66d7_1130x779.png" title="Image" /></p>
+<h4>🌟 Day 2</h4>
+<p>In Day 1 Jordyn implemented the code for a base enemy, and made the behavior for only 1 type of enemy. Now that we had a functioning game from Day 1, it was time to add content. If you play D&amp;D then you know about the different kinds of dice.</p>
+<p>Most people are familiar with the D6 (6 sided dice 🎲) but we wanted to add <strong>ALL THE DICE</strong>!!! D4, D6, D8, D10, D12, D20, D100, D2, you name it!</p>
+<p><img alt="candy pack lot" src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" title="candy pack lot" /></p>
+<p>During the short 48 hour time frame, we managed to implement a D4, D6, D8 and the D20. Going into this, I expected making pixel art dice to be difficult. But oh man, I underestimated the difficulty. Some of the final sprites took me up to 4 hours to complete, just for 1 dice! 😭</p>
+<p>It was worth it though, because the final results look sick! Here’s a GIF of the final game!</p>
+<p><img alt="Animated GIF" src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_lossy/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8efab83-f221-4dff-bd80-b1f5d5f0fae3_480x270.gif" title="Animated GIF" /></p>
+<p>If you want to try it out, you can play it using <a href="https://polarcube1.itch.io/roll-for-damage">this</a> link!</p>
+<h2>💡 Lessons Learned</h2>
+<p>Even though this Jam was incredibly smooth sailing, I still learned a lot from it!</p>
+<ol>
+<li>
+<p>Be In-Person - I had worked with Jordyn before, but it was online, and to say our results were sub-optimal is an overstatement. Even if working together online technically can do most of what being in-person can do, being in-person does most if not all those things better. Examples:</p>
+<ol>
+<li>
+<p>Asking for help - For some reason, when online, especially if you’re not actively in a call with the other person, asking the other person for an opinion or for help with something is tougher. You end up spending more time banging your head against the wall until you get it working. Whereas when you’re in person, the other person is literally right there, you just turn your head a little and:<br />
+    “Hey can you take a look at this, for some reason it looks off and I can’t figure out why“<br />
+    “Try straitening the line a little bit?“<br />
+    ”Oh! Yep, yep that’s it, great thanks!”<br />
+    And done, issue solved.</p>
+</li>
+<li>
+<p>Spatial Sound - This may not sounds like a big deal, but Jordyn and I (and any other friend I’ve programmed with as well) when working together online, we hop in a voice channel on Discord, and leave our mics open to make it easier to ask and answer questions. Which is great, makes it faster. But, I think out loud (mumbling), so does Jordyn, so does any other of my friends I’ve programmed with. When you’re in person, this isn’t a problem, cause Jordyn can’t hear me mumbling, and I can’t hear Jordyn mumbling.</p>
+<p>When you’re on a discord call and our microphones are right next to our mouths, it picks up the mumbling. It’s such a small detail, but made the experience better.</p>
+</li>
+<li>
+<p>Analog Tools - Our feature checklist was in a journal I brought, and as we were going through the features, we got up, and checked them off the list. You can do this with virtual tools as well, but analog systems have a different feeling to them (one which I prefer)</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Reverse Thinking - In one of Mark’s game streams were he plays people’s games in a random order, he stumbled upon our <a href="https://www.youtube.com/watch?v=o9ZSs72WI24">game</a>. When playing it he made a specific remark: “I’m trying to think of how it would impact the game if the enemies weren’t dice“ practically thinking about the game in reverse. His conclusion is that, it wouldn’t change much if the enemies weren’t dice. The theme was not implemented in a strong way when it comes to the gameplay aspect.  </p>
+<p>I find this to be an important way to think about the significance of things. If this wasn’t here, what kind of impact would that have. Answering that question shows you how important, or how useless some things really are.</p>
+</li>
+<li>
+<p>Split Up By Types of Work - In our last project, the way we split up work was by task instead of type of work. For example, Jordyn would make the player, I would make the map. This didn’t work very well for us. For GMTK, we played on our strengths. I know how to make pixel art, Jordyn knows how to code, so we split up work that way.<br />
+    Jordyn would code the behaviors, and I would come in and add the art assets afterwards.</p>
+</li>
+</ol>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

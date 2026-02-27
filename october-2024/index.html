@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>October 2024 (Personal Website, France, Statistics)</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>October 2024 (Personal Website, France, Statistics)</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2024-10-31" class="article-date">2024-10-31</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• newsletter</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>Hello! 👋</p>
+<p>Recap of the last ~30 days:</p>
+<ol>
+<li>Updating my Personal Website</li>
+<li>Solo Travel to Southern France</li>
+<li>Learning more advanced statistical concepts</li>
+<li>SpotlessMind</li>
+</ol>
+<h1>Updating my Personal Website</h1>
+<p>My personal website has pretty much looked the same for the past 3 years. Except for the odd editing of how old I am, or whatever I'm currently working on, it hasn't changed much.</p>
+<p>Here's a screenshot of it:<br />
+<img src="/static/imgs/old-personal-website.png" alt="old-personal-website.png"><br></p>
+<p>My biggest qualm with this design is that it was very difficult to publish new essays. I would write them out on a google doc, then manually write the html for them, copy all the images into the file structure, make the slug, set the date, etc... It was lots of work.</p>
+<p>I fixed that in this version. Now I have an obsidian vault that I use specifically to write my essays, and when I push my changes to Gitlab (as oppose to GitHub), the CD/CI pipeline automatically converts all the wikis into their own pages, with the images, the date, and the slug. It's all hands free.</p>
+<p>I also restyled my website while I was at it, here's the new design:</p>
+<p><img src="/static/imgs/new-personal-website.png" alt="new-personal-website.png"><br></p>
+<p>Another major difference between the old and the new site, is that the old site was written in pure HTML and CSS, whereas the new site uses Python Flask as the backend, and renders templates for the front end. This will eventually allow me to implement more intricate features into my website. One I'm particularly excited to code up is my own email service so that I can stop posting these letters on substack, and instead have them native to my website.</p>
+<p>I made a list of features I would like to implement in the future, you can read it here if you are curious: https://nicolasgatien.com/features-i-plan-to-implement-on-this-website</p>
+<h2>Next Step:</h2>
+<p>Before I can implement any new features -- if you did navigate to that link, you probably noticed the glaring "NOT SECURE" in the top left:</p>
+<p><img src="/static/imgs/Pasted image 20241031224016.png" alt="Pasted image 20241031224016.png"><br></p>
+<p>I have yet to actually try to solve this problem, but it's the next thing I need to fix. If you're willing to help me out if I get stuck, I'd love for you to hit reply or to leave a comment so I know who to reach out to.</p>
+<p>Thanks!</p>
+<h1>Solo Travel to Southern France</h1>
+<p><img src="/static/imgs/foix-castle.png" alt="foix-castle.png"><br></p>
+<p>On the morning of October 7th, I said goodbye to my family, partner, and friends, and took off to Toulouse, France. It was a bittersweet moment. I've been waiting for this trip for years, but it's also my first time traveling solo outside of North America.</p>
+<p>I had been waiting because I wanted to travel using a site called WorkAway. WorkAway allows you to find hosts in your desired country of travel, and in exchange for your host housing and feeding you, you work for them 5 hours per day. This work can vary a lot depending on your host. I decided to stay at a farm, which lead to most of my chores being related to taking care of animals, general outdoor upkeep, and gardening. If I had stay in a city, those chores may have been more like cleaning windows, organizing bookshelves, cooking meals, etc...</p>
+<h2>Why Travel With WorkAway?</h2>
+<p>First reason one might want to travel with WorkAway is that it's really cheap. I don't need to pay for food or lodging while I'm here, and when traveling, those two expenses combined make up a majority of the cost. All I'm paying for is my transportation to and from my hosts to the next one.</p>
+<p>Second reason is that I get to experience the lives of local people. In December I flew to Costa Rica with my partner, and it was very lovely. The beaches were nice, the food was delectable, and our apartment was great, my only complaint is that I felt like a tourist -- because I was. I was not living the way that locals in Costa Rica lived, and instead I got a very filtered view of what Costa Rica is.</p>
+<p>Contrast to my first experience with WorkAway, I'm in the thick of it. I'm living with local people, eating the same meals they eat, sleeping with the same schedule, doing the same kind of work. If my hosts get all their food from the local grocery store, that's also what I'm eating. If they get it all from their garden and eat vegetarian, I'm also eating vegetarian (I wasn't expecting it when I got there, but I can't say I disliked eating vegetarian for three weeks). I get to learn everything about the music they sing, the games they play, the authors they respect, the food they eat, the chores they loathe, the work they love, everything. I actually get to experience the culture of the French microcosm I'm visiting.</p>
+<p>Third reason is that it's a very easy way to meet people and build a friendship. I certainly know that next time I travel to France I plan to make a stop at my hosts home to say "Hi!"</p>
+<p>I am currently writing this issue from a new location, where I am instead staying on my own. Digital nomad style. I'll see how it goes and which one I prefer between the two, and I'll be writing about it next month.</p>
+<p>NOTE: While I was gardening I often listened to the Lex Fridman podcast, if you're interested in AI and programming I highly recommend this episode: https://open.spotify.com/episode/6KBpL2XfR9VdojbKNpE7cX?si=7438ea4971bd4d89</p>
+<h1>Learning More Statistics</h1>
+<p>I've had a renewal in my fascination with math and statistics, as a result I have been learning more statistical concepts I was not previously familiar with and I wanted to give a spotlight to Tom Faulkenberry. </p>
+<p>His lectures are incredibly easy to digest, and he's the best source I've been able to find so far. Highly recommend his lecture series on Psychometric Analysis: https://www.youtube.com/watch?v=yiBcACPx4Gk&amp;list=PLBLGdYHoHOPilIW9byykHWZoOayJwAZKS</p>
+<h1>SpotlessMind</h1>
+<p>Last month (<a href="/september-2024" class="internal">september-2024</a>) I mentioned I was working at a startup, and that I couldn't say much, but soon that would change. That soon is yet to come. I still need to stay quiet, but things are brewing.</p>
+<hr />
+<p>That's all! </p>
+<p>Thanks for reading, and Happy Halloween 🎃!</p>
+<p>Sincerely,</p>
+<p>Nico</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

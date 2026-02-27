@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Only Text of MineDojo Wiki Dataset</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Only Text of MineDojo Wiki Dataset</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-11-10" class="article-date">2025-11-10</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p><a href="https://minedojo.org/">MineDojo</a> has compiled an incredibly large dataset of Minecraft wiki pages. The team behind the dataset put a lot of work into recording the full state of each wikipedia page by including the images and full screenshots of the page. However for LLM fine-tuning purposes, including all the images results in a very large dataset, with most of the space being taken up by files which won't be used.</p>
+<p><img src="/static/imgs/minedojo-dataset-original-size.png" alt="minedojo-dataset-original-size.png"><br></p>
+<p>I wrote a script which recursively deleted every single image in the wiki folders, leaving only the JSON files with the text components inside.</p>
+<p><img src="/static/imgs/minedojo-textonly-dataset-size.png" alt="minedojo-textonly-dataset-size.png"><br></p>
+<p>I've uploaded this only-text dataset to my GitHub in case it's of use to anyone else. I'm planning on using it to generate Minecraft question-answer pair dataset for fine-tuning.</p>
+<p>Link: https://github.com/Nicolas-Gatien/minedojo-text-only</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

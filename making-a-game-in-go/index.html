@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Making a Game in Go</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Making a Game in Go</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2025-12-21" class="article-date">2025-12-21</time>
+    
+
+    
+    <span class="article-author">• Nicolas Gatien</span>
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>For the last week I've been slowly working on a game in the Go programming language. It's my first real go at it (pun intended), and I've been enjoying it a lot. I'm using <a href="https://ebitengine.org/">Ebitengine</a> for the graphics and sounds, and everything else is done manually.</p>
+<p>All the code for this game is on <a href="https://github.com/Nicolas-Gatien/GoFrog">GitHub</a>.</p>
+<p>It's quite straightforward, I have a Game struct, with all the images I need and the state of the game:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Game</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">FROG_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">OPEN_FROG_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">FLY_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">TONGUE_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">CATCH_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">CARD_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">CONFUSED_FLY_UPGRADE_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">FASTER_FLY_UPGRADE_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">MORE_FLY_UPGRADE_IMAGE</span><span class="w"> </span><span class="o">*</span><span class="nx">ebiten</span><span class="p">.</span><span class="nx">Image</span>
+<span class="w">    </span><span class="nx">flies</span><span class="w"> </span><span class="p">[]</span><span class="nx">Fly</span>
+<span class="w">    </span><span class="nx">catchEffects</span><span class="w"> </span><span class="p">[]</span><span class="nx">CatchEffect</span>
+<span class="w">    </span><span class="nx">upgrades</span><span class="w"> </span><span class="p">[]</span><span class="nx">Upgrade</span>
+<span class="w">    </span><span class="nx">time</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">frog</span><span class="w"> </span><span class="nx">Frog</span>
+<span class="w">    </span><span class="nx">audioContext</span><span class="w"> </span><span class="o">*</span><span class="nx">audio</span><span class="p">.</span><span class="nx">Context</span>
+<span class="w">    </span><span class="nx">audioChomp</span><span class="w"> </span><span class="o">*</span><span class="nx">audio</span><span class="p">.</span><span class="nx">Player</span>
+<span class="w">    </span><span class="nx">audioCatch</span><span class="w"> </span><span class="o">*</span><span class="nx">audio</span><span class="p">.</span><span class="nx">Player</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>When the script is run, each image is loaded from my assets folder:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ebitenutil</span><span class="p">.</span><span class="nx">NewImageFromFile</span><span class="p">(</span><span class="s">&quot;assets/sprites/&lt;image-name&gt;.png&quot;</span><span class="p">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>My current implementation has this exact block of code for each image in the game struct. I'm thinking of a better ways to manage loading images. For one, images should most likely be kept separate from the game state. Second, loading each image individually is a little tedious.</p>
+<p>Lastly I have Update and Draw functions to handle all the game functionality and all the game rendering. Go has been my first introduction to pointers, and so far they have been incredible. Though, I have heard dire warnings of pointers... It may only be a matter of time before I am betrayed.</p>
+<p>Here's a GIF of the game in it's current state:<br />
+<img src="/static/imgs/frog-game-gif.gif" alt="frog-game-gif.gif"><br></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

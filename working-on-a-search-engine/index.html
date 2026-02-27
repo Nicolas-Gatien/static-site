@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Working on a Search Engine</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Working on a Search Engine</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2026-01-29" class="article-date">2026-01-29</time>
+    
+
+    
+
+    
+    <span class="article-type">• flow</span>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>For the last month (since January 6th) I've been working on a search engine for personal websites. I've been documenting most of my development on Github as I go, but it's very removed from my current website. Which is not ideal.</p>
+<p>Onto today's updates:</p>
+<h3>Web Crawler &amp; Indexer</h3>
+<p><a href="https://github.com/Handmade-Search-Engine/handmade-indexer/commit/a2f3b552ac3fc5fdfd7748103f92704d32bebd82#diff-d69435012d362ceebd4174c14517c4d417121b4205928c07a15bed6213c6df05L62-L64">206 status code</a> &gt; I have a function which checks whether a website has a <code>robots.txt</code> file, and sometimes it was claiming a website didn't have one when it did. Turns out some websites were responding to my http request with a status code of 206? <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/206">206</a> is a successful response, but it's partial content, and as far as I understand should only be sent to requests containing a Range header? Anywho, I just modified my status check to include 206 as a successful status:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">StatusCode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">resp</span><span class="p">.</span><span class="nx">StatusCode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">206</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// early return</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">Robots</span><span class="p">{}</span>
+<span class="p">}</span>
+<span class="c1">// the rest only runs if the server responds with a successful status</span>
+</code></pre></div>
+
+<p><a href="https://github.com/Handmade-Search-Engine/handmade-indexer/commit/cc94f6625c7e41a9327234df115ac12e19cb34ee">repeat robots.txt check</a> &gt; Each time my web crawler visited a URL, before visiting it would check if the hostname had a robots.txt file. This doubled the number of requests I was sending to each server. I implemented a very simple map (Robots object is a representation of a robots.txt file):</p>
+<div class="highlight"><pre><span></span><code><span class="nx">robotsMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">Robots</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now when my web crawler visits a url, it first checks if its robots.txt has already been parsed:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">robots</span><span class="p">,</span><span class="w"> </span><span class="nx">robotsAlreadyParsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">robotsMap</span><span class="p">[</span><span class="nx">hostname</span><span class="p">]</span>
+</code></pre></div>
+
+<p>If the hostname doesn't have any known robot rules, then it tries to fetch them:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nx">robotsAlreadyParsed</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;Fetching robots.txt for: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">hostname</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">robots</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getRobots</span><span class="p">(</span><span class="nx">hostname</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">robotsMap</span><span class="p">[</span><span class="nx">hostname</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">robots</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Now it only checks each hostname once while it is running.</p>
+<p><a href="https://github.com/Handmade-Search-Engine/handmade-indexer/commit/4114a1a94d6c98d6b4387c50429a865e0f3346ea">crawldelay on indexer</a> &gt; my web crawler and web indexer are two different services. The web crawler first finds all the websites and puts them all in a queue, and then I can run the indexer any time I want and it will go through the queue and index each page's keywords. But it wasn't following the crawl delay from those page's robots.txt files, so I implemented something very similar to what I just described above.</p>
+<div class="highlight"><pre><span></span><code><span class="n">hostdelays</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">if</span> <span class="n">hostname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hostdelays</span><span class="p">:</span>
+    <span class="n">rp</span> <span class="o">=</span> <span class="n">txtrobots</span><span class="o">.</span><span class="n">RobotFileParser</span><span class="p">()</span>
+    <span class="n">rp</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="s2">&quot;https://&quot;</span> <span class="o">+</span> <span class="n">hostname</span> <span class="o">+</span> <span class="s2">&quot;/robots.txt&quot;</span><span class="p">)</span>
+    <span class="n">rp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="n">delay</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">crawl_delay</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">delay</span><span class="p">:</span>
+        <span class="n">hostdelays</span><span class="p">[</span><span class="n">hostname</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hostdelays</span><span class="p">[</span><span class="n">hostname</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># default delay</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;waiting: </span><span class="si">{</span><span class="n">hostdelays</span><span class="p">[</span><span class="n">hostname</span><span class="p">]</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">hostdelays</span><span class="p">[</span><span class="n">hostname</span><span class="p">])</span>
+</code></pre></div>
+
+<h3>API</h3>
+<p><a href="https://github.com/Handmade-Search-Engine/handmade-api/commit/0db6d8e481099310d9f696757e56fb911da8d1a0">exclusive search</a> &gt; Previously when you searched something on the interface, it would return all pages where any of those words are mentioned at least once. I assumed that when making a multi-word query, the pages which have the most of those words would rank highest. I was wrong. When searching "hello there" the top page didn't contain the word "there".</p>
+<p>I changed to search to work closer to how google scholar works, where it only returns the pages that include all the words in the query. I will need to modify the interface in some way to communicate that's how the search works, but this change should make the search slightly more precise.</p>
+<h3>Interface</h3>
+<p>no results &gt; Speaking of a more exclusive search, the interface used to display nothing when no results were found. Now it displays a short message explaining no results were found:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">searchResultsList</span><span class="p">.</span><span class="nx">innerHTML</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`&lt;p&gt;There are no entries with ALL the words in your query.&lt;/p&gt;`</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Here's a screenshot:<br />
+<img src="/static/imgs/human-web-interface-no-results.png" alt="human-web-interface-no-results.png"><br></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

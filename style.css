@@ -75,6 +75,18 @@ img {
     border-radius: 8px;
 }
 
+li:has(> .newsletter-link) { 
+    display: flex;
+    list-style:disc;
+}
+
+.newsletter-link {
+    text-overflow: ellipsis;
+    text-wrap-mode: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .button {
     image-rendering: pixelated;
     box-shadow: 0px 3px black;

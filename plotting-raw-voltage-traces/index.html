@@ -36,7 +36,7 @@
 
 <div class="article-content">
     <p>Today I plotted the raw voltage values from the same <a href="https://datadryad.org/dataset/doi:10.25349/D9031Z">dataset</a> I've been working with for the past week. Here's the result:<br />
-<img src="/static/imgs/organoid-raw-voltage.png" alt="organoid-raw-voltage.png"><br></p>
+<img src="static/imgs/organoid-raw-voltage.png" alt="organoid-raw-voltage.png"><br></p>
 <p>I did this just by loading the <code>h5</code> file and getting the <code>sig</code> array:</p>
 <div class="highlight"><pre><span></span><code><span class="n">f</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;mea/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">sig</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;sig&#39;</span><span class="p">]</span>
@@ -62,9 +62,9 @@
 </code></pre></div>
 
 <p>This is actually the same data I used to generate the following image:<br />
-<img src="/static/imgs/7month_2953_diff_animation_1000_0.gif" alt="7month_2953_diff_animation_1000_0.gif"><br></p>
+<img src="static/imgs/7month_2953_diff_animation_1000_0.gif" alt="7month_2953_diff_animation_1000_0.gif"><br></p>
 <p>The next step is to clean up the data and perform spike sorting so that I can see when the neurons are actually spiking. The end goal is create a raster plot like the one displayed in the <a href="https://www.nature.com/articles/s41467-022-32115-4">paper</a> associated with this dataset.</p>
-<p><img src="/static/imgs/raster-plot.png" alt="raster-plot.png"><br><br />
+<p><img src="static/imgs/raster-plot.png" alt="raster-plot.png"><br><br />
 Each row represents a neuron (not a channel) and each blue dot represents a neuron spiking. To achieve this I need to use a spike sorting algorithm, and I haven't figured those out yet.</p>
 <p>Additionally, I'm sure there's some pre-processing I also need to do. When I look at the current voltage graph, it reminds me of the first image I produced while <a href="/graphing-eeg-data" class="internal">graphing-eeg-data</a>. It's a little messy and all over the place.</p>
 </div>

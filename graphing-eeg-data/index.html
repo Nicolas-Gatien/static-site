@@ -46,7 +46,7 @@
 <div class="highlight"><pre><span></span><code><span class="n">raw</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">n_channels</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">picks</span><span class="o">=</span><span class="s1">&#39;eeg&#39;</span><span class="p">)</span>
 </code></pre></div>
 
-<p><img src="/static/imgs/example_raw.png" alt="example_raw.png"><br></p>
+<p><img src="static/imgs/example_raw.png" alt="example_raw.png"><br></p>
 <p>I was very happy to see something on the graph as oppose to nothing.  I got a recommendation to then try applying some filtering to my data. Mainly, low and high pass filters. </p>
 <p>I found this article, "<a href="https://www.scielo.org.mx/scielo.php?script=sci_arttext&amp;pid=S1665-64232021000600584">The effects of applying filters on EEG signals for classifying developers’ code comprehension</a>" which mentions low-pass filters. The article reads: <em>"the filter used frequencies below 1Hz and greater than 40Hz to attenuate signals."</em> I interpreted this as meaning that all frequencies under 1Hz are discarded, and all frequencies above 40Hz are discarded. The text seems to read in the opposite way, but these values only work in this orientation.</p>
 <div class="highlight"><pre><span></span><code><span class="n">raw</span> <span class="o">=</span> <span class="n">mne</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_raw_bdf</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;data.bdf&#39;</span><span class="p">,</span> <span class="n">preload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -63,7 +63,7 @@
 </code></pre></div>
 
 <p>Then the resulting graph feels much more legible, even if I still haven't done anything to interpret it.</p>
-<p><img src="/static/imgs/example_filtered.png" alt="example_filtered.png"><br></p>
+<p><img src="static/imgs/example_filtered.png" alt="example_filtered.png"><br></p>
 </div>
 
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>February 2026 (Utilitarian Minecraft Agent, Website Redesign)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>February 2026 (Utilitarian Minecraft Agent, Website Redesign)</h1>
+        </div>
+        
+
+<div class="article-meta">
+    
+    <time datetime="2026-02-28" class="article-date">2026-02-28</time>
+    
+
+    
+</div>
+
+<div class="article-content">
+    <p>Hello!  👋</p>
+<p>Here's a quick update regarding what I've been up to in February!</p>
+<h2>Utilitarian Minecraft Agent</h2>
+<p>My ongoing research project with Carleton University is about the utility ("goodness") of time spent planning. When an agent is planning, it isn't taking any action. So how much should an agent plan before taking actions?</p>
+<p>I'm investigating this by creating 3 different types of agents which play Minecraft:</p>
+<ol>
+<li>Free Agent: Executes random plans without considering their utility</li>
+<li>Satisficing Agent: Executes the first plan that is expected to yield positive utility</li>
+<li>Maximizing Agent: Generates new plans until one meets a very high threshold of expected utility, and executes that one</li>
+</ol>
+<p>Both the satisficing and maximizing agents have an ethical module that evaluates the expected utility of their plans, and either instructs them to execute a given one, or to make new plans.</p>
+<p>I'm currently in the bug-fixing iteration cycle. The agents play the game, and most things are working. But from time to time, the agents will crash for some random reason (which I fix and then run the next test trial)</p>
+<p>The current bug I'm trying to fix, is that the code that evaluates the utility of the Minecraft world throughout the play session, will randomly output a much higher number then what it had been outputting before. Which results in random spikes of utility throughout the play session, which shouldn't be there.</p>
+<p><img src="../static/imgs/utility-over-time.png" alt="utility-over-time.png"><br></p>
+<p>In any case, I can feel this project is moving towards a conclusion. You can read more about this project on my new <a href="https://nicolasgatien.com/projects/minecraft-utility-agent/">project</a> page!</p>
+<h2>Website Redesign</h2>
+<p>As I've continued to work on my <a href="https://nicolasgatien.com/projects/handmade-search-engine/">search engine</a> I've been exploring more of the "small internet". I noticed my old site had very few outgoing links, and generally felt somewhat bloated. A few months ago I had decided to rewrite my personal website using the React framework. That was way overkill for what I want my site to do.</p>
+<p>I've now opted for a simple static site generation approach. All of the page contents are written in .md files, and I run a script whenever I want to publish a new piece which generates all the html pages using jinja2 templates.</p>
+<p>Check out the new <a href="https://nicolasgatien.com">website</a>, poke around a little, and let me know what you think :D</p>
+<p><img src="../static/imgs/website-redesign.png" alt="website-redesign.png"><br></p>
+<h2>Interesting Links</h2>
+<ul>
+<li><a href="https://www.worldwidewebsize.com/">worldwidewebsize.com</a> is rather self-explanatory, but it's neat little website measuring the size of the internet</li>
+<li><a href="https://marginalia-search.com/">marginalia-search.com</a> cool search engine for the indie web, I've found myself genuinely using this one a few times over February.</li>
+</ul>
+<hr />
+<p>Those are my highlights of this month.</p>
+<p>I'll be back in your inbox in ~30 days.</p>
+<p>Thanks for reading 👋</p>
+<p>Nicolas Gatien</p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../app.js"></script>
+</body>
+</html>

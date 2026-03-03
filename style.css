@@ -56,6 +56,10 @@ a:hover {
     transition: all 0.05s ease-in-out;
 }
 
+embed {
+    width: 100%;
+}
+
 li {
     transition: all 0.07s ease-in-out;
 }

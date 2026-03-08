@@ -61,11 +61,11 @@ embed {
     height: 800px;
 }
 
-li {
+li:has(a) {
     transition: all 0.07s ease-in-out;
 }
 
-li:hover {
+li:has(a):hover {
         transition: all 0.07s ease-in-out;
     margin-left: 10px;
 }

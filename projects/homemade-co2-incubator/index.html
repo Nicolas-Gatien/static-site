@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homemade CO2 Incubator</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Homemade CO2 Incubator</h1>
+        </div>
+        
+<div class="project-preamble">
+    
+        <span class="project-status">Archived</span>
+    
+    <p><p>May 2024 I started building a CO2 incubator to try and grow cells. This page describes the steps I took, along with where I got stuck, and eventually put the project on hiatus.</p>
+<p>I followed<a href="https://www.uottawa.ca/faculty-science/professors/andrew-pelling"> Andrew Pelling's</a> instructions from 2014 on how to <a href="https://github.com/pellinglab/DIY-Incubator-Dec2014/blob/master/%5B2024%20UPDATE%5D%20DIY%20CO2%20INCUBATOR%20BIOREACTOR%20FOR%20MAMMALIAN%20CELL%20CULTURE.pdf">build an incubator</a>.</p>
+<p>I first searched my house for a cooler I could sacrifice for the project, and found this little one. This one is significantly smaller than the one in Dr. Pelling's instructions, but I figured it would work fine nonetheless.</p>
+<p><img src="../static/imgs/sacrificial-cooler.png" alt="sacrificial-cooler.png"><br></p>
+<p>I covered the whole inside of the cooler with a reflective tarp. I glued the tarp to the sides with hot glue, and also used aluminum tape on the edges to keep the whole interior reflective.</p>
+<p><img src="../static/imgs/open-cooler.png" alt="open-cooler.png"><br></p>
+<p>Once the whole thing was covered in reflective material, I disassembled an old defunct desktop computer from my parent's garage and extracted the cooling fan and heat sink. I secured the fan by screwing it to the top of the incubator. I covered the holes at the top of the incubator with aluminum tape to keep it all airtight.</p>
+<p><img src="../static/imgs/incubator-fan.png" alt="incubator-fan.png"><br></p>
+<p>I decided I would start with the heating element to familiarize myself with elecctronics, and then I would give a shot at the CO2 modulation. This was my first time working with electronics. I made a very simple LED program using an Arduino, and felt ready to order my components.</p>
+<p><img src="../static/imgs/arduino-first.png" alt="arduino-first.png"><br></p>
+<p>I ordered a small heating matt, along with some heat sensors. The heating matt would eventually be paired with the heat sink I also extracted from the defunct desktop, and would look something a little like this:</p>
+<p><img src="../static/imgs/heater-with-sink.png" alt="heater-with-sink.png"><br></p>
+<p>Using the temperature sensor I got from my order, I put together a small circuit which read the temperature in the room. My sensor reading between 50-60 degrees Celcius once I started getting any output. I figured something was wrong with my circuit, so I unplugged the Arduino and went to adjust things. I picked up the sensor, and it burned my fingers! (maybe the temperature readings were correct...)</p>
+<p>After I got burned by the sensor, I decided to put this project on pause until I educated myself more about circuits. That way I wouldn't get hurt again playing around with something I didn't quite understand. Especially since this was the safe part of the project.</p>
+<p>I have yet to return to this project because I decided to familiarize myself with more of the software side. You can read more <a href="https://nicolasgatien.com/projects/mea-visualization/">here</a>.</p></p>
+</div>
+
+<p>No entries yet for this project.</p>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../../app.js"></script>
+</body>
+</html>

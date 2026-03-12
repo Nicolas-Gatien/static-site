@@ -131,7 +131,7 @@ li:has(> .newsletter-link) {
     }
 }
 
-.heading-div:hover {
+.heading-div:not(.no-button):hover {
     display: flex;
     align-items: center;
     transition: gap ease-in-out 0.05s;

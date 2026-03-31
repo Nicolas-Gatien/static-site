@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".time-ago[data-date]").forEach(el => {
         const date = new Date(el.dataset.date);
+        console.log(date)
         const days = Math.floor((today - date) / (1000 * 60 * 60 * 24));
         el.textContent = formatTimeAgo(days);
     });

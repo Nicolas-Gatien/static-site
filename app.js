@@ -1,4 +1,18 @@
+function formatTimeAgo(days) {
+    if (days < 30) return `(${days}) ${days === 1 ? "day" : "days"} ago`;
+    if (days < 365) return `(${Math.round(days / 30.44)}) months ago`;
+    return `(${Math.round(days / 365.25)}) years ago`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    document.querySelectorAll(".time-ago[data-date]").forEach(el => {
+        const date = new Date(el.dataset.date);
+        const days = Math.floor((today - date) / (1000 * 60 * 60 * 24));
+        el.textContent = formatTimeAgo(days);
+    });
     const sides = document.querySelectorAll(".side")
 
     const fontSize = 16

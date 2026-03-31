@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cellular Automata Agent</title>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+</head>
+
+<body>
+    <div id="left" class="side"></div>
+
+    <div id="content">
+        
+        <div class="heading-div">
+            <button class="back-button" onclick="history.back()">Back</button>
+            <h1>Cellular Automata Agent</h1>
+        </div>
+        
+        
+<div class="project-preamble">
+    
+        <span class="project-status">
+            Ongoing •
+            <span class="time-ago" data-date=""></span>
+        </span>
+    
+    <p><p>Can we use Cellular Automata as an agent's brain? If so, we need to give it inputs and extract outputs. I took inspiration from biological neural networks and placed "stimulation electrodes" and "motor regions".</p>
+<p>I put together a quick prototype with Claude, which has gotten far enough for me to determine this is worth writing on my own.</p>
+<p>In the middle is a game of pong with one player. The paddle on the right is controlled by the two motor regions. Each frame, if there are more living cells in the left region, the paddle moves down, if there are more in the right region, the paddle moves up. As the ball travels closer to the right side, the "strength" of the "stimulation" is increased (a bigger area of cells are set to be alive). As the ball travels up and down, the placement of the stimulation matches to the closest electrode to its y position.</p>
+<p>The rules of the cellular automata are determined by the neural network on the left. It has 4 inputs, the cell state, and then the sum of its neighborhood (8 neighbors) 3 times. The two outputs are alive and dead. If dead is higher, the cell turns off, if alive is higher, the cell becomes alive.</p>
+<p><img src="../static/imgs/images/CAPong.mp4" alt="images/CAPong.mp4"><br></p></p>
+</div>
+
+
+    </div>
+
+    <div id="right" class="side"></div>
+
+    <script src="../../app.js"></script>
+</body>
+</html>

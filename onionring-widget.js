@@ -45,7 +45,7 @@ else {
   indexText = ""
   //if you've chosen to include an index, this builds the link to that
   if (useIndex) {
-    indexText = `<a href='${indexPage}'>index</a> | `;
+    indexText = `<a href='${indexPage}'>index</a>`;
   }
 
   randomText = ""
@@ -58,12 +58,11 @@ else {
   tag.insertAdjacentHTML('afterbegin', `
   <table>
     <tr>
+    <div>
       <td class='webring-prev'><a href='${sites[previousIndex]}'>←</a></td>
-      <td class='webring-info'>${ringName}</br>
-      <span class='webring-links'>
-        ${randomText}
-        ${indexText}
+      <td class='webring-info'><a href='${indexPage}'>${ringName}</a></br>
       <td class='webring-next'><a href='${sites[nextIndex]}'>→</a></td>
+    </div>
     </tr>
   </table>
   `);

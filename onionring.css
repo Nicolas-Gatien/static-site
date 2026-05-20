@@ -15,26 +15,41 @@
   margin: 0 auto; /* centers the widget */
 }
 
-#hopamine-ring table tr td {
+#hopamine-ring table tr {
   padding: 15px; /* creates some space between the links and text inside the widget */
 }
 
-#hopamine-ring .webring-prev {
-  color: #79baef;
+#hopamine-ring .webring-prev > a {
+  color: #79baef !important;
+  margin-right: 15px;
   text-align:right;
 }
 
 #hopamine-ring .webring-info {
-  color: #79baef;
+  background-color: #79baef;
+  width: 40px;
+  height: 40px;
+  margin: 15px;
+  border-radius: 8px;
   text-align:center;
 }
 
-#hopamine-ring .webring-next {
-  color: #79baef;
+#hopamine-ring .webring-info > a {
+  color: red !important;
+  filter:
+    drop-shadow(1px 0 0 white)
+    drop-shadow(-1px 0 0 white)
+    drop-shadow(0 1px 0 white)
+    drop-shadow(0 -1px 0 white);
+}
+
+#hopamine-ring .webring-next > a {
+  margin-left: 15px;
+  color: #79baef !important;
   text-align:left;
 }
 
-#hopamine-ring .webring-links {
-  color: #79baef;
+#hopamine-ring .webring-links > a {
+  color: #79baef !important;
   font-size:small;
 }

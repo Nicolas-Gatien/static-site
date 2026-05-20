@@ -20,17 +20,21 @@
 }
 
 #hopamine-ring .webring-prev {
+  color: #79baef;
   text-align:right;
 }
 
 #hopamine-ring .webring-info {
-   text-align:center;
+  color: #79baef;
+  text-align:center;
 }
 
 #hopamine-ring .webring-next {
+  color: #79baef;
   text-align:left;
 }
 
 #hopamine-ring .webring-links {
+  color: #79baef;
   font-size:small;
 }

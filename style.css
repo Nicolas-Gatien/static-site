@@ -167,3 +167,9 @@ li:has(> .newsletter-link) {
     max-width: 25%;
     border-radius: 8px;
 }
+
+pre {
+    padding: 30px;
+    overflow: scroll;
+    background-color: aliceblue;
+}

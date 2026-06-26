@@ -7,6 +7,7 @@
 
 //the full URLs of all the sites in the ring
 var sites = [
+'https://nikolemorales.carrd.co/',
 'https://nicolasgatien.com/',
 ];
 

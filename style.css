@@ -39,6 +39,9 @@ body {
 
 .side {
     width: 25%;
+    position: sticky;
+    top: 10px;
+    height: max(100vh);
     display: flex;
     flex-wrap: wrap;
     cursor: default;

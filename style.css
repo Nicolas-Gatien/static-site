@@ -173,3 +173,12 @@ pre {
     overflow: scroll;
     background-color: aliceblue;
 }
+
+.daily-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.daily-block > .date {
+    text-align: right;
+}

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Crawl-delay: 10 seconds
+Crawl-delay: 0
 Content-Signal: ai-train=no, search=yes, ai-input=no

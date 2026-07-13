@@ -198,7 +198,28 @@ pre {
     align-items: center;
 }
 
-.daily-block-header >button {
+.iine-button {
     width: 50px;
     height: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    transition: all ease-in-out 0.1s;
+}
+
+.iine-button:hover {
+    cursor: pointer;
+}
+
+.iine-button > span {
+    transition: all ease-in-out 0.1s;
+}
+
+.iine-button:hover > span {
+    transform: scale(1.2);
+    color: red;
 }
